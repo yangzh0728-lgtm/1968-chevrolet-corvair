@@ -20,3 +20,12 @@
 .exit-fullscreen{position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:50;background:#f3f4f2;color:#122234;font-size:13px;padding:10px 15px;border:1px solid #9bafbf;box-shadow:0 3px 15px #0003}
 
 html.motion-paused{scroll-behavior:auto}html.motion-paused::view-transition-old(root),html.motion-paused::view-transition-new(root){animation:none!important}
+
+/* Official supplied logo. Preserve the original artwork and its navy color. */
+.logo-brand{align-self:stretch;display:flex;align-items:center}
+.logo-crop{position:relative;display:block;width:148px;height:94px;overflow:hidden;flex-shrink:0}
+.logo-crop img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:122px;height:122px;max-width:none;object-fit:contain}
+.footer-logo{display:inline-flex;justify-self:start;align-self:start;background:var(--paper);padding:12px 18px;border-radius:2px}
+.footer-logo .logo-crop{width:210px;height:155px}
+.footer-logo .logo-crop img{width:215px;height:215px}
+@media(max-width:700px){.logo-brand .logo-crop{width:116px;height:76px}.logo-brand .logo-crop img{width:98px;height:98px}.footer-logo{padding:10px 15px}.footer-logo .logo-crop{width:190px;height:140px}.footer-logo .logo-crop img{width:194px;height:194px}}
