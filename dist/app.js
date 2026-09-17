@@ -14,19 +14,11 @@ const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
 const canAnimate=()=>!paused&&!reduceMotion.matches;
 const currentPath=location.pathname.replace(/\/$/,'')||'/';
 for(const link of document.querySelectorAll('.site-header nav a,.mobile-menu a')){const path=new URL(link.href).pathname.replace(/\/$/,'')||'/';if(currentPath===path||(path!=='/'&&currentPath.startsWith(path+'/')))link.setAttribute('aria-current','page');}
-const revealTargets=document.querySelectorAll('.intro h2,.intro-bottom,.section-heading,.home-explore>div,.journal-card,.value-row,.team-section>div,.vision-section h2,.contact-strip,.roadmap-preview>a');
+const revealTargets=document.querySelectorAll('.calm-story>div,.calm-explore>div,.note-list>a,.intro h2,.intro-bottom,.section-heading,.home-explore>div,.journal-card,.value-row,.team-section>div,.vision-section h2,.contact-strip,.roadmap-preview>a');
 const revealObserver=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){entry.target.classList.remove('reveal-pending');entry.target.classList.add('revealed');revealObserver.unobserve(entry.target);}},{threshold:.08});
 for(const el of revealTargets){if(canAnimate())el.classList.add('reveal-pending');revealObserver.observe(el);}
-const progress=document.createElement('div');progress.className='scroll-progress';progress.setAttribute('aria-hidden','true');document.body.prepend(progress);
-let scrollQueued=false;
-const heroImage=document.querySelector('.hero-photo img');
-function updateScroll(){scrollQueued=false;const range=document.documentElement.scrollHeight-innerHeight;progress.style.width=`${range>0?Math.min(100,scrollY/range*100):0}%`;if(heroImage)heroImage.style.setProperty('--image-y',canAnimate()?`${Math.min(scrollY*.022,16)}px`:'0px');}
-addEventListener('scroll',()=>{if(!scrollQueued){scrollQueued=true;requestAnimationFrame(updateScroll);}},{passive:true});updateScroll();
-const hero=document.querySelector('.hero');
-hero?.addEventListener('pointermove',e=>{if(!canAnimate()||e.pointerType==='touch')return;const r=hero.getBoundingClientRect();hero.style.setProperty('--pointer-x',`${(e.clientX-r.left-r.width/2)*.012}px`);hero.style.setProperty('--pointer-y',`${(e.clientY-r.top-r.height/2)*.012}px`);});
-hero?.addEventListener('pointerleave',()=>{hero.style.setProperty('--pointer-x','0px');hero.style.setProperty('--pointer-y','0px');});
-motionButton?.addEventListener('click',()=>{updateScroll();if(paused)document.querySelectorAll('.reveal-pending').forEach(el=>el.classList.remove('reveal-pending'));});
-reduceMotion.addEventListener('change',()=>{if(reduceMotion.matches)document.querySelectorAll('.reveal-pending').forEach(el=>el.classList.remove('reveal-pending'));updateScroll();});
+motionButton?.addEventListener('click',()=>{if(paused)document.querySelectorAll('.reveal-pending').forEach(el=>el.classList.remove('reveal-pending'));});
+reduceMotion.addEventListener('change',()=>{if(reduceMotion.matches)document.querySelectorAll('.reveal-pending').forEach(el=>el.classList.remove('reveal-pending'));});
 
 // Restoration stages use the WAI-ARIA tab keyboard pattern.
 const stageTabs=[...document.querySelectorAll('[data-stage]')];
