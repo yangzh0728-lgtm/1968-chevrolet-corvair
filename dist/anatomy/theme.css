@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+/* Legacy Garage's light studio theme. Layout and inspection behavior stay shared. */
+:root{color-scheme:light;--bg:#edf0f1;--panel:#f3f4f2;--line:#d3d9dc;--text:#122234;--muted:#66727d;--accent:#326aff;--blue:#326aff;font-family:'DM Sans','PingFang SC','Microsoft YaHei',sans-serif}
+body{background:var(--bg)}
+button:hover{color:var(--text)}
+.topbar{background:var(--panel);padding:0 24px}
+.brand{gap:14px;min-width:0}.brand strong{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:25px;letter-spacing:.05em}.brand-year{color:var(--muted);font:500 12px 'DM Sans',sans-serif}.brand-sub{font-size:10px;letter-spacing:.09em;color:var(--muted)}
+.explorer-logo{position:relative;width:86px;height:74px;overflow:hidden;flex-shrink:0}.explorer-logo img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:94px;height:94px;object-fit:contain}
+.header-meta{color:var(--muted);font-size:10px}.header-actions{gap:12px}.quiet{color:var(--muted)}
+.outline{background:#fff;border-color:var(--line);border-radius:3px;color:var(--text)}.outline:hover{background:#e6ecf4;border-color:#91a9c7}
+.catalog{background:var(--panel)}.catalog-heading .eyebrow{color:var(--muted)}.catalog-heading h1{color:var(--text);font-size:18px}
+.catalog-tabs{background:#e6eaea;border-color:var(--line);border-radius:4px}.catalog-tabs button{color:var(--muted)}
+.catalog-tabs button[aria-selected=true]{background:var(--text);color:#fff}
+.system-list{border-color:var(--line)}.system-row.active{background:#e1e8f1;border-color:#c1cfdf}.system-row.active .system-symbol{color:var(--blue)}.system-eye{color:var(--muted)}
+.search{background:#fff;border-color:var(--line);border-radius:3px}.search input::placeholder{color:var(--muted)}.search:focus-within{border-color:var(--blue)}
+.assembly-filter select{background:#fff;color:var(--text);border-color:var(--line)}
+.part-list,.group-catalog,.parts-catalog>#system-list,.inspector{scrollbar-color:#b6c2cb transparent}
+.part-row:hover{background:#e7ebed}.part-row.selected{background:#e1e9f5;border-left-color:var(--blue)}
+.part-row small,.part-row em{color:var(--muted)}.part-row.selected em{color:#425972}
+.catalog-footer{color:var(--muted);background:var(--panel)}.catalog-footer small{color:var(--muted)}
+.group-overview{background:#e6ebf0;color:var(--text);border-color:var(--line);border-radius:3px}
+.assembly-card{background:#fff;border-color:var(--line);border-left-color:#93a8bf;border-radius:3px;margin:9px 0}
+.assembly-card.active{background:#e1e9f5;border-color:#8ba8d0;border-left-color:var(--blue)}
+.assembly-card-main>span,.assembly-card-main small{color:var(--muted)}
+.assembly-card:hover{background:#edf1f6}.assembly-eye{color:var(--muted)}
+.group-summary{background:#e8edf2;border-color:var(--line)}
+.group-summary h2{color:var(--text)}.group-summary p,.group-summary details,.group-summary summary{color:#536779}
+.group-back,.assembly-link{color:var(--blue)}
+.group-actions button{background:white;border-color:var(--line);color:var(--text)}.group-actions button:hover{background:#dce7f6}
+.stage{background:radial-gradient(ellipse at 50% 35%,#fafbfb 0,#e9edef 65%,#dce3e8 100%)}
+.breadcrumb button{color:#536779}.breadcrumb>span{color:var(--blue)}
+.stage-caption .eyebrow,.stage-caption p{color:var(--muted)}.stage-caption h2{color:var(--text);font-weight:500}
+.view-tools{background:#f8faf9e8;border-color:#cbd5de;border-radius:4px;box-shadow:0 3px 12px #12223405}
+.view-button{color:#536779}.view-button.active,.view-button:hover{background:var(--text);color:white}
+.assembly-console{background:#fafbfaf5;border-color:#c8d2dc;box-shadow:0 12px 35px #12223412;border-radius:5px}
+.console-top>span,.slider-end,.play-button{color:#42586c}.console-bottom{border-color:var(--line)}
+#explode-output{color:var(--text);font-weight:500}#explode-output span,#visible-count{color:var(--muted)}
+.level-switch{background:#e7ecef;border-color:var(--line)}.level-switch button{color:#536779}
+.level-switch button[aria-pressed=true]{background:var(--text);color:#fff}
+input[type=range]{background:linear-gradient(to right,var(--accent) var(--progress,0%),#c8d2dc var(--progress,0%))}
+input[type=range]::-webkit-slider-thumb{box-shadow:0 0 0 5px #326aff12}
+.loading{background:#f8faf9f5;border-color:var(--line);box-shadow:0 12px 45px #12223415;border-radius:5px}
+.loading>span{color:var(--muted)}.loading-spinner{border-color:#ccd6e0;border-top-color:var(--blue)}
+progress,progress::-webkit-progress-bar{background:#dce3eb}progress::-webkit-progress-value{background:var(--blue)}
+.inspector{background:#fafbfaf5;border-color:#c8d2dc;box-shadow:0 12px 35px #12223415;border-radius:5px}
+.inspector-top,.inspector-actions{background:#fafbfa}.icon-button{color:var(--muted)}
+.selected-source{color:var(--muted)}.part-tags span{border-color:var(--line);color:#536779;background:#eef2f6}
+.purpose-section{background:#e7eef8;border-left-color:var(--blue)}.purpose-section p,.info-section p{color:#42586c}
+.part-facts,.part-specs,.source-details{border-color:var(--line);color:var(--muted)}
+.part-facts strong,.part-specs dd{color:var(--text)}.part-specs dt,.related-section h3 span,.source-details summary{color:var(--muted)}
+.related-parts button{background:#f0f3f5;border-color:var(--line)}.related-parts button:hover{background:#e2eaf4;border-color:#a8bcd4}
+.related-parts span,.related-empty,.reference-item small,.scope-note{color:var(--muted)!important}
+.reference-item a{color:#2654cb}
+.primary{background:var(--text);color:white;border-radius:3px}.primary:hover{background:var(--blue);color:white}
+.help-panel{background:#fafbfaf5;border-color:var(--line);box-shadow:0 12px 35px #12223415;border-radius:5px}
+.help-panel p{color:#42586c}.help-panel small{color:var(--muted)}.help-panel kbd{background:#e1e7ed;color:var(--text)}
+.restore-hidden{background:#f8faf9ed;border-color:#c3cfdb;color:var(--text)}
+.status-message{background:var(--text);color:white;border-color:var(--text)}
+.annotation-lines path{stroke:#58728c80}.annotation-lines circle{fill:#647d95;stroke:#eef2f5}.annotation-lines circle.selected{fill:var(--blue);stroke:white}
+.part-annotation{background:#f8faf9ed;border-color:#bac8d6;box-shadow:0 3px 12px #1222340a;border-radius:3px}
+.part-annotation span{color:#667b8d}.part-annotation strong{color:var(--text)}
+.part-annotation:hover{background:#e6edf5;border-color:#829fbd}
+.part-annotation.is-selected{background:#e3ecfc;border-color:var(--blue)}
+@media(max-width:760px){.topbar{padding:0 14px;gap:10px}.explorer-logo{width:62px;height:62px}.explorer-logo img{width:76px;height:76px}.brand{gap:10px}.brand strong{font-size:21px}.brand-sub{display:none}.brand-year{font-size:10px}.catalog{box-shadow:15px 0 40px #12223425}.header-actions{gap:5px}.header-actions button{font-size:12px;padding:9px 7px}}
+@media(max-width:430px){.brand strong{font-size:19px}.brand-year{display:none}.explorer-logo{width:55px}.explorer-logo img{width:66px;height:66px}.topbar{gap:5px}.brand{gap:7px}}
+.assembly-card-main:hover{background:#e7edf4}
+.group-actions button:last-child{background:var(--text);border-color:var(--text);color:#fff}.group-actions button:last-child:hover{background:var(--blue);border-color:var(--blue)}

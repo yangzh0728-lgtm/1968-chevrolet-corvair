@@ -12,13 +12,13 @@ const white=new THREE.Color(1,1,1);
 export class AnatomyViewer{
  constructor(canvas,onSelect){
   this.canvas=canvas;this.onSelect=onSelect;this.parts=new Map();this.batches=[];this.entries=[];this.state=newViewState();this.amount=0;this.dirty=true;this.pendingFrame=false;
-  this.renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=.88;
+  this.renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.02;
   this.scene=new THREE.Scene();this.camera=new THREE.PerspectiveCamera(36,1,.008,300);this.camera.position.set(-6.6,3.25,5.5);
   this.controls=new OrbitControls(this.camera,canvas);this.controls.target.set(0,.6,0);this.controls.enableDamping=true;this.controls.dampingFactor=.12;this.controls.minDistance=.045;this.controls.maxDistance=50;this.controls.maxPolarAngle=Math.PI*.98;this.controls.addEventListener('change',()=>this.invalidate());this.controls.addEventListener('start',()=>{this.cameraMotion=null;this.beforeCameraInteraction?.()});
   const pmrem=new THREE.PMREMGenerator(this.renderer),room=new RoomEnvironment();this.environment=pmrem.fromScene(room,.01,.1,100,{size:512}).texture;this.scene.environment=this.environment;this.scene.environmentIntensity=.85;room.dispose();pmrem.dispose();
-  this.scene.add(new THREE.HemisphereLight(0xdceaff,0x62707c,1.25));const key=new THREE.DirectionalLight(0xffedda,2.1);key.position.set(-3,6,4);this.scene.add(key);const rim=new THREE.DirectionalLight(0xb8d9ff,1.35);rim.position.set(3,4,-4);this.scene.add(rim);
-  this.floor=new THREE.GridHelper(28,56,0x536577,0x354858);this.floor.material.transparent=true;this.floor.material.opacity=.16;this.floor.position.y=-.025;this.scene.add(this.floor);
-  this.highlightGroup=new THREE.Group();this.scene.add(this.highlightGroup);this.highlightMaterial=new THREE.MeshBasicMaterial({color:0xffc382,transparent:true,opacity:.28,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1});this.selectionBox=new THREE.Box3Helper(new THREE.Box3(),0xf1bd7d);this.selectionBox.visible=false;this.selectionBox.material.transparent=true;this.selectionBox.material.opacity=.7;this.scene.add(this.selectionBox);
+  this.scene.add(new THREE.HemisphereLight(0xf1f5ff,0x8998a7,1.4));const key=new THREE.DirectionalLight(0xf5f8ff,2.1);key.position.set(-3,6,4);this.scene.add(key);const rim=new THREE.DirectionalLight(0xd1e2f5,1.2);rim.position.set(3,4,-4);this.scene.add(rim);
+  this.floor=new THREE.GridHelper(28,56,0xa5b4c2,0xb8c5d1);this.floor.material.transparent=true;this.floor.material.opacity=.1;this.floor.position.y=-.025;this.scene.add(this.floor);
+  this.highlightGroup=new THREE.Group();this.scene.add(this.highlightGroup);this.highlightMaterial=new THREE.MeshBasicMaterial({color:0x326aff,transparent:true,opacity:.28,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1});this.selectionBox=new THREE.Box3Helper(new THREE.Box3(),0x326aff);this.selectionBox.visible=false;this.selectionBox.material.transparent=true;this.selectionBox.material.opacity=.7;this.scene.add(this.selectionBox);
   this.raycaster=new THREE.Raycaster();this.pointer=new THREE.Vector2();
   const tap=createTapRecognizer(e=>{const r=canvas.getBoundingClientRect();this.pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);this.raycaster.setFromCamera(this.pointer,this.camera);const hit=this.raycaster.intersectObjects(this.batches,false)[0];this.onSelect(hit?hit.object.userData.partIds[hit.batchId]:null)});
   for(const [event,handler] of [['pointerdown','down'],['pointermove','move'],['pointerup','up'],['pointercancel','cancel'],['lostpointercapture','cancel']])canvas.addEventListener(event,e=>tap[handler](e));
@@ -29,7 +29,7 @@ export class AnatomyViewer{
  resize(){const {width,height}=this.canvas.parentElement.getBoundingClientRect();if(width<=0||height<=0)return;
   // Keep Retina detail while bounding the framebuffer cost on large displays.
   const pixelRatio=Math.min(window.devicePixelRatio||1,2,Math.sqrt(8000000/(width*height)));
-  this.renderer.setPixelRatio(pixelRatio);this.renderer.setSize(width,height,false);this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.setInspectionFraming(this.inspectionPanel);this.invalidate()}
+  this.renderer.setPixelRatio(pixelRatio);this.renderer.setSize(width,height,false);this.camera.aspect=width/height;this.camera.updateProjectionMatrix();this.setInspectionFraming(this.inspectionPanel);if(this.ready)this.fit(undefined,false);this.invalidate()}
  setInspectionFraming(panel){
   this.inspectionPanel=panel;
   const rect=this.canvas.getBoundingClientRect(),{width,height}=rect;

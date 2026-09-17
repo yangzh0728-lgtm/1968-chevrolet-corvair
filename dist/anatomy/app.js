@@ -1,4 +1,4 @@
-import {AnatomyViewer} from './viewer.js';
+import {AnatomyViewer} from './viewer.js?v=legacy-studio-1';
 import {SYSTEMS} from './explosion.js';
 import {matchesPart,locationLabel,KIND_LABELS} from './part-info.js';
 import {PartLabels} from './labels.js';
