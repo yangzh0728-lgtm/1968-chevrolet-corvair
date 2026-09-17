@@ -45,3 +45,5 @@ document.querySelector('#copy-email')?.addEventListener('click',async()=>{const 
 if(document.querySelector('#viewer-container'))import('./explorer.js');
 
 matchMedia('(min-width: 701px)').addEventListener('change',e=>{if(e.matches)closeMenu();});
+
+if(document.querySelector('[data-car-reveal]')) import('./hero-reveal.js');
