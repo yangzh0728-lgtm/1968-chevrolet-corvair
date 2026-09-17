@@ -1,5 +1,6 @@
+import {t} from './language.js';
 import {ASSEMBLY_ANCHORS} from './assemblies.js';
-import {layoutLabels,KIND_LABELS} from './part-info.js';
+import {layoutLabels,KIND_LABELS} from './part-info.js?v=language-1';
 
 const LANDMARKS={
  all:['p0864','p0935','p0887','p0165','p2141','p3591','p3593'],
@@ -27,9 +28,9 @@ export class PartLabels{
    this.key=key;for(const n of this.nodes.values()){n.button.remove();n.line.remove();n.dot.remove()}this.nodes.clear();
    for(const id of ids){
     const isGroup=id.startsWith('g:'),item=isGroup?this.viewer.assemblyIndex.byId.get(id.slice(2)):this.viewer.parts.get(id);if(!item)continue;
-    const selected=id===state.selected,button=document.createElement('button');button.className='part-annotation'+(selected?' is-selected':'');button.setAttribute('aria-label',isGroup?`查看${item.label}的组成`:`查看${item.label}的用途`);button.title=item.info?.purpose||item.description||item.label;
+    const selected=id===state.selected,button=document.createElement('button');button.className='part-annotation'+(selected?' is-selected':'');button.setAttribute('aria-label',isGroup?t(`查看${item.label}的组成`):t(`查看${item.label}的用途`));button.title=item.info?.purpose||item.description||item.label;
     const name=document.createElement('strong');name.textContent=item.label;
-    const sub=document.createElement('span');sub.textContent=isGroup?`${item.partIds.length} 个部件 · 点击进入总成`:`${item.id.toUpperCase()} · ${selected?'当前选中':KIND_LABELS[item.info?.kind]||'查看用途'}`;button.append(sub,name);button.onclick=()=>isGroup?this.onAssembly(item.id):this.onSelect(id);this.container.append(button);
+    const sub=document.createElement('span');sub.textContent=isGroup?t(`${item.partIds.length} 个部件 · 点击进入总成`):t(`${item.id.toUpperCase()} · ${selected?'当前选中':KIND_LABELS[item.info?.kind]||'查看用途'}`);button.append(sub,name);button.onclick=()=>isGroup?this.onAssembly(item.id):this.onSelect(id);this.container.append(button);
     const line=document.createElementNS(this.svg.namespaceURI,'path'),dot=document.createElementNS(this.svg.namespaceURI,'circle');line.classList.toggle('selected',selected);dot.classList.toggle('selected',selected);dot.setAttribute('r',selected?'3.5':'2.5');this.svg.append(line,dot);this.nodes.set(id,{button,line,dot,selected,isGroup});
    }
   }

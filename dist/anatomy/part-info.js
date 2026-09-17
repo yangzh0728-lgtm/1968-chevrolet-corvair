@@ -1,10 +1,11 @@
+import {t} from './language.js';
 export const KIND_LABELS={mechanical:'机械功能件',electrical:'电气件',structural:'结构件',fastener:'紧固件',seal:'密封件',finish:'表面与装饰细节',graphic:'文字与图形标识'};
 
 export function enrichParts(parts,catalog){
  if(catalog.schemaVersion!==1||!catalog.entries||!catalog.sources)throw Error('零件说明文件格式不正确。');
  for(const p of parts){
   const info=catalog.entries[p.id];
-  if(!info?.purpose||!info?.operation||!info?.name)throw Error(`零件 ${p.id} 的说明缺失。`);
+  if(!info?.purpose||!info?.operation||!info?.name)throw Error(t(`零件 ${p.id} 的说明缺失。`));
   p.originalLabel=p.label;p.label=info.name;p.info=info;
   p.searchText=searchText(p);
  }
@@ -19,8 +20,8 @@ export function matchesPart(p,query=''){
 
 export function locationLabel(p){
  const [x,,z]=p.center,[minX,,minZ]=p.bounds.min,[maxX,,maxZ]=p.bounds.max;
- const longitudinal=maxX-minX>2.8?'纵向贯通':x<-.6?'车身前部':x>.7?'车身后部':'乘员舱附近';
- const lateral=maxZ-minZ>1.2?'横向跨车身':z>.16?'左侧（驾驶员侧）':z<-.16?'右侧（乘客侧）':'中线附近';
+ const longitudinal=maxX-minX>2.8?t('纵向贯通'):x<-.6?t('车身前部'):x>.7?t('车身后部'):t('乘员舱附近');
+ const lateral=maxZ-minZ>1.2?t('横向跨车身'):z>.16?t('左侧（驾驶员侧）'):z<-.16?t('右侧（乘客侧）'):t('中线附近');
  return `${longitudinal} · ${lateral}`;
 }
 

@@ -1,9 +1,10 @@
+import {t,localize} from './language.js';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {makeExplosionPlan} from './explosion.js';
-import {enrichParts} from './part-info.js';
+import {enrichParts} from './part-info.js?v=language-1';
 import {createTapRecognizer} from './pointer-input.js';
 import {inspectionDistance,boxFitDistance} from './view-framing.js';
 import {createAssemblyIndex,createAssemblyMotion,newViewState,inView,assemblyAnchor} from './assemblies.js';
@@ -23,7 +24,7 @@ export class AnatomyViewer{
   const tap=createTapRecognizer(e=>{const r=canvas.getBoundingClientRect();this.pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);this.raycaster.setFromCamera(this.pointer,this.camera);const hit=this.raycaster.intersectObjects(this.batches,false)[0];this.onSelect(hit?hit.object.userData.partIds[hit.batchId]:null)});
   for(const [event,handler] of [['pointerdown','down'],['pointermove','move'],['pointerup','up'],['pointercancel','cancel'],['lostpointercapture','cancel']])canvas.addEventListener(event,e=>tap[handler](e));
   canvas.addEventListener('dblclick',()=>{if(this.state.selected)this.focusPart(this.state.selected)});
-  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();window.dispatchEvent(new CustomEvent('viewererror',{detail:'图形连接中断，请重新加载页面。'}))});
+  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();window.dispatchEvent(new CustomEvent('viewererror',{detail:t('图形连接中断，请重新加载页面。')}))});
   new ResizeObserver(()=>this.resize()).observe(canvas.parentElement);this.resize();
  }
  resize(){const {width,height}=this.canvas.parentElement.getBoundingClientRect();if(width<=0||height<=0)return;
@@ -53,13 +54,13 @@ export class AnatomyViewer{
   const moving=this.controls.update();if(this.dirty||moving||anim){this.renderer.render(this.scene,this.camera);this.onDraw?.();this.dirty=false;}if(anim||moving)this.invalidate();
  }
  async load(manifestURL,onProgress,annotationCatalog,assemblyCatalog){
-  const response=await fetch(manifestURL);if(!response.ok)throw Error('无法载入零件目录，请重试。');this.manifest=await response.json();if(annotationCatalog)enrichParts(this.manifest.parts,annotationCatalog);this.plan=makeExplosionPlan(this.manifest.parts);this.assemblyIndex=createAssemblyIndex(this.manifest.parts,assemblyCatalog);this.motion=createAssemblyMotion(this.manifest.parts,this.assemblyIndex,this.plan);for(const p of this.manifest.parts)this.parts.set(p.id,{...p,entries:[],offset:[0,0,0]});
+  const response=await fetch(manifestURL);if(!response.ok)throw Error(t('无法载入零件目录，请重试。'));this.manifest=await response.json();localize(this.manifest);if(annotationCatalog)enrichParts(this.manifest.parts,annotationCatalog);this.plan=makeExplosionPlan(this.manifest.parts);this.assemblyIndex=createAssemblyIndex(this.manifest.parts,assemblyCatalog);this.motion=createAssemblyMotion(this.manifest.parts,this.assemblyIndex,this.plan);for(const p of this.manifest.parts)this.parts.set(p.id,{...p,entries:[],offset:[0,0,0]});
   const base=new URL(manifestURL,location.href),loader=new GLTFLoader();let done=0,total=this.manifest.assets.reduce((a,x)=>a+x.bytes,0);
   const ordered=[...this.manifest.assets].sort((a,b)=>['body','wheels','trim','interior','chassis','engine'].indexOf(a.system)-['body','wheels','trim','interior','chassis','engine'].indexOf(b.system));
   for(const asset of ordered){onProgress(done/total,asset.system);const result=await loader.loadAsync(new URL(asset.url,base).href,e=>onProgress((done+e.loaded)/total,asset.system));this.addAsset(result.scene);done+=asset.bytes;onProgress(done/total,asset.system);this.applyTransforms();this.fit('perspective',false);await new Promise(r=>requestAnimationFrame(r));}
   this.ready=true;this.fit('perspective',false);this.invalidate();return this.manifest;
  }
- addAsset(root){root.updateMatrixWorld(true);const groups=new Map();root.traverse(mesh=>{if(!mesh.isMesh)return;let node=mesh;while(node&&!this.parts.has(node.name))node=node.parent;if(!node)return;const part=this.parts.get(node.name);const material=mesh.material;if(Array.isArray(material))throw Error('不支持未分开的材质组');if(material.transmission>0){material.transmission=0;material.opacity=.24;material.transparent=true;material.depthWrite=false;material.roughness=.12}material.side=THREE.DoubleSide;if(material.isMeshStandardMaterial){material.envMapIntensity=.8;material.roughness=Math.max(material.roughness,.025)}const geo=mesh.geometry;if(!geo.index){const ar=geo.attributes.position.count>65535?new Uint32Array(geo.attributes.position.count):new Uint16Array(geo.attributes.position.count);for(let i=0;i<ar.length;i++)ar[i]=i;geo.setIndex(new THREE.BufferAttribute(ar,1))}for(const key of Object.keys(geo.attributes)){if(!['position','normal'].includes(key))geo.deleteAttribute(key)}if(!geo.attributes.normal)geo.computeVertexNormals();const signature=material.uuid;if(!groups.has(signature))groups.set(signature,{material,items:[]});groups.get(signature).items.push({geometry:geo,base:mesh.matrixWorld.clone(),part});});
+ addAsset(root){root.updateMatrixWorld(true);const groups=new Map();root.traverse(mesh=>{if(!mesh.isMesh)return;let node=mesh;while(node&&!this.parts.has(node.name))node=node.parent;if(!node)return;const part=this.parts.get(node.name);const material=mesh.material;if(Array.isArray(material))throw Error(t('不支持未分开的材质组'));if(material.transmission>0){material.transmission=0;material.opacity=.24;material.transparent=true;material.depthWrite=false;material.roughness=.12}material.side=THREE.DoubleSide;if(material.isMeshStandardMaterial){material.envMapIntensity=.8;material.roughness=Math.max(material.roughness,.025)}const geo=mesh.geometry;if(!geo.index){const ar=geo.attributes.position.count>65535?new Uint32Array(geo.attributes.position.count):new Uint16Array(geo.attributes.position.count);for(let i=0;i<ar.length;i++)ar[i]=i;geo.setIndex(new THREE.BufferAttribute(ar,1))}for(const key of Object.keys(geo.attributes)){if(!['position','normal'].includes(key))geo.deleteAttribute(key)}if(!geo.attributes.normal)geo.computeVertexNormals();const signature=material.uuid;if(!groups.has(signature))groups.set(signature,{material,items:[]});groups.get(signature).items.push({geometry:geo,base:mesh.matrixWorld.clone(),part});});
   for(const {material,items} of groups.values()){
    const vertices=items.reduce((s,e)=>s+e.geometry.attributes.position.count,0),indices=items.reduce((s,e)=>s+e.geometry.index.count,0);const batch=new THREE.BatchedMesh(items.length,vertices,indices,material);batch.frustumCulled=false;batch.perObjectFrustumCulled=true;batch.sortObjects=material.transparent;batch.userData.partIds=[];
    for(const item of items){const geometryId=batch.addGeometry(item.geometry),instanceId=batch.addInstance(geometryId);batch.setMatrixAt(instanceId,item.base);batch.userData.partIds[instanceId]=item.part.id;const entry={...item,batch,instanceId,matrix:item.base.clone()};item.part.entries.push(entry);this.entries.push(entry);}

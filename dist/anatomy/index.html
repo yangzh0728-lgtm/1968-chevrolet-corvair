@@ -6,18 +6,18 @@
 <meta name="description" content="旋转、拆解与探索 1968 Chevrolet Corvair。查看整车、发动机、底盘及每一个已建模零件。">
 <link rel="icon" type="image/png" href="/assets/legacy-garage-logo.png">
 <link rel="stylesheet" href="./styles.css?v=legacy-garage-1">
-<link rel="stylesheet" href="./theme.css?v=legacy-studio-1">
+<link rel="stylesheet" href="./theme.css?v=language-1">
 <script type="importmap">{"imports":{"three":"./vendor/build/three.module.js","three/addons/":"./vendor/addons/"}}</script>
 <style>.brand{color:inherit;text-decoration:none}</style></head>
 <body>
 <header class="topbar">
- <a class="brand" href="/explore/" target="_top" title="Return to Legacy Garage 26"><span class="explorer-logo"><img src="/assets/legacy-garage-logo.png" alt="Legacy Garage" width="1254" height="1254"></span><div><strong>CORVAIR <span class="brand-year">1968</span></strong><span class="brand-sub">LEGACY GARAGE 26 / 汽车解剖台</span></div></a>
+ <a class="brand" href="/explore/" target="_top" title="返回 Legacy Garage 26"><span class="explorer-logo"><img src="/assets/legacy-garage-logo.png" alt="Legacy Garage" width="1254" height="1254"></span><div><strong>CORVAIR <span class="brand-year">1968</span></strong><span class="brand-sub">LEGACY GARAGE 26 / 汽车解剖台</span></div></a>
  <div class="header-meta">CHEVROLET <span>/</span> MONZA SPORT COUPE</div>
- <div class="header-actions"><button id="mobile-catalog" class="quiet mobile-only">零件目录</button><button id="help-toggle" class="quiet" aria-expanded="false" aria-controls="help-panel">操作说明</button><button id="reset" class="outline">复原整车 <span aria-hidden="true">↺</span></button></div>
+ <div class="header-actions"><div class="language-switch" role="group" aria-label="Language / 语言" data-no-translate><button disabled data-language="en" lang="en" aria-pressed="true">English</button><button disabled data-language="zh" lang="zh-CN" aria-pressed="false">中文</button></div><button id="mobile-catalog" class="quiet mobile-only">零件目录</button><button id="help-toggle" class="quiet" aria-expanded="false" aria-controls="help-panel">操作说明</button><button id="reset" class="outline">复原整车 <span aria-hidden="true">↺</span></button></div>
 </header>
 <main class="workspace">
  <aside class="catalog" id="catalog" aria-label="系统与零件目录">
-  <div class="catalog-heading"><span class="eyebrow">EXPLORE THE MACHINE</span><h1>整车，总成，零件。</h1></div>
+  <div class="catalog-heading"><span class="eyebrow">探索汽车结构</span><h1>整车，总成，零件。</h1></div>
   <div class="catalog-tabs" role="tablist" aria-label="目录层级"><button id="tab-groups" role="tab" aria-selected="true" aria-controls="group-catalog">功能总成</button><button id="tab-parts" role="tab" aria-selected="false" aria-controls="parts-catalog">零件目录</button></div>
   <div id="group-catalog" class="group-catalog" role="tabpanel" aria-labelledby="tab-groups"></div>
   <div id="parts-catalog" class="parts-catalog" role="tabpanel" aria-labelledby="tab-parts" hidden>
@@ -34,7 +34,7 @@
   <div class="stage-top"><div class="breadcrumb"><button id="back-all">整车</button><span id="crumb-system"></span></div><div class="view-tools" aria-label="观察角度"><button id="toggle-labels" class="view-button active" aria-pressed="true" title="显示或隐藏画面中的零件名称">标注</button><button data-view="perspective" class="view-button active" title="三分之四视角">立体</button><button data-view="side" class="view-button">侧面</button><button data-view="top" class="view-button">俯视</button><button id="fit-view" class="view-button" title="让所有可见零件进入画面">适应画面</button></div></div>
   <canvas id="viewport" tabindex="0" aria-label="三维汽车。拖动旋转，滚轮缩放，点击零件查看详情。"></canvas>
   <div id="part-labels" class="part-labels" aria-label="关键零件标注"></div>
-  <div class="stage-caption"><span id="stage-mode" class="eyebrow">ASSEMBLED</span><h2 id="stage-title">完整的 Corvair</h2><p id="stage-description">拖动旋转 · 滚轮缩放 · 点击查看零件</p></div>
+  <div class="stage-caption"><span id="stage-mode" class="eyebrow">装配完成</span><h2 id="stage-title">完整的 Corvair</h2><p id="stage-description">拖动旋转 · 滚轮缩放 · 点击查看零件</p></div>
   <div id="loading" class="loading" role="status"><div class="loading-spinner"></div><strong id="loading-title">正在准备汽车模型</strong><span id="loading-detail">载入车身、内饰与机械结构</span><progress id="loading-progress" max="100" value="0"></progress><button id="retry" hidden class="outline">重新加载</button></div>
   <div id="help-panel" class="help-panel" hidden><strong>像解剖模型一样探索</strong><p>拖动旋转，滚轮缩放；右键拖动平移。触屏可单指旋转、双指缩放。</p><p>选择「按总成」后拉动滑杆，各总成会保持组内装配一起分开。点击总成进入组内，再展开其零件。目录可切换「功能总成」与「零件目录」。点击零件或目录条目，选择「单独查看」。标注会跟随零件移动；顶部「标注」可开关名称。目录也能按用途搜索，例如「散热」「点火」或「密封」。</p><p><kbd>F</kbd> 定位所选 <kbd>Esc</kbd> 取消选择 <kbd>R</kbd> 复原整车</p><small>展示的是模型中已建立的零件；一体车壳保持为一个可选件。</small></div>
   <aside id="inspector" class="inspector" aria-label="所选零件详情" hidden>
@@ -58,5 +58,5 @@
   <div id="status-message" class="status-message" role="status" aria-live="polite"></div>
  </section>
 </main>
-<script type="module" src="./app.js?v=legacy-studio-1"></script>
+<script type="module" src="./app.js?v=language-1"></script>
 </body></html>

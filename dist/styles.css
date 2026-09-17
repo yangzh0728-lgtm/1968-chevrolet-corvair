@@ -139,3 +139,17 @@ h2{font-size:clamp(40px,4.5vw,66px);line-height:1.08}
 .studio-poster .studio-download{color:var(--muted);font-size:12px;margin-top:18px}
 @media(max-width:700px){.studio-poster{padding:0 18px 22px;min-height:450px}.studio-car{height:250px}.studio-launch{display:block;padding-top:15px}.studio-launch .button{margin-top:18px}.studio-poster .studio-download{line-height:1.6}.explorer-toolbar{padding:14px}}
 .viewer-container:has(.studio-poster:not([hidden])){min-height:0}
+
+/* Language remains reachable on desktop and alongside the mobile menu. */
+.language-switch{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid #bfc7cf;border-radius:30px;flex-shrink:0}
+.language-switch button{font:500 13px/1.2 'DM Sans',Arial,sans-serif;color:#233b53;background:transparent;border:0;border-radius:24px;padding:9px 11px;cursor:pointer;min-height:34px}
+.language-switch button[aria-pressed="true"]{background:#122234;color:#fff}
+.language-switch button:focus-visible{outline:2px solid #326aff;outline-offset:3px}
+.site-header>.language-switch{margin-left:28px}
+html[lang="zh-CN"]{font-family:'DM Sans','PingFang SC','Microsoft YaHei',sans-serif}
+html[lang="zh-CN"] h1,html[lang="zh-CN"] h2,html[lang="zh-CN"] h3{font-family:'PingFang SC','Microsoft YaHei',sans-serif;letter-spacing:-.045em;line-height:1.18}
+html[lang="zh-CN"] .reveal-heading h1{font-size:clamp(2.8rem,7.8vw,7.8rem)}
+html[lang="zh-CN"] .page-hero h1{font-size:clamp(3rem,7.5vw,7rem)}
+html[lang="zh-CN"] .eyebrow{letter-spacing:.1em}
+html[lang="zh-CN"] .article-body p{line-height:1.9}
+@media(max-width:700px){.site-header>.language-switch{margin-left:auto;margin-right:14px}.language-switch button{padding:8px 10px}.site-header .logo-brand{flex-shrink:0}html[lang="zh-CN"] .reveal-heading h1{font-size:clamp(2.65rem,10vw,4.4rem)}}

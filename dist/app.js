@@ -1,3 +1,4 @@
+import {t} from './language.js';
 const menuToggle=document.querySelector('.menu-toggle');
 const menu=document.querySelector('#mobile-menu');
 function closeMenu(){menu.hidden=true;menuToggle.setAttribute('aria-expanded','false');menuToggle.setAttribute('aria-label','Open navigation');}
@@ -37,12 +38,12 @@ document.querySelector('#clear-filters')?.addEventListener('click',()=>{category
 
 // Contact links create a draft in the visitor's mail app; no data is submitted.
 const topics=[...document.querySelectorAll('[data-topic]')];
-function selectTopic(topic){const valid=topics.find(b=>b.dataset.topic===topic);if(!valid)return;topics.forEach(b=>b.setAttribute('aria-pressed',String(b===valid)));document.querySelector('#topic-email').href='mailto:contact@legacygarage26.org?subject='+encodeURIComponent(`Legacy Garage 26 — ${topic}`);}
+function selectTopic(topic){const valid=topics.find(b=>b.dataset.topic===topic);if(!valid)return;topics.forEach(b=>b.setAttribute('aria-pressed',String(b===valid)));document.querySelector('#topic-email').href='mailto:contact@legacygarage26.org?subject='+encodeURIComponent(`Legacy Garage 26 — ${t(topic)}`);}
 topics.forEach(b=>b.addEventListener('click',()=>selectTopic(b.dataset.topic)));
 if(topics.length)selectTopic(new URLSearchParams(location.search).get('topic')||'Corvair story');
 document.querySelector('#copy-email')?.addEventListener('click',async()=>{const status=document.querySelector('#copy-status');try{await navigator.clipboard.writeText('contact@legacygarage26.org');status.textContent='Email address copied.';}catch{status.textContent='Select and copy: contact@legacygarage26.org';}});
 
-if(document.querySelector('#viewer-container'))import('./explorer.js');
+if(document.querySelector('#viewer-container'))import('./explorer.js?v=language-1');
 
 matchMedia('(min-width: 701px)').addEventListener('change',e=>{if(e.matches)closeMenu();});
 

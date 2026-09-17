@@ -65,3 +65,14 @@ progress,progress::-webkit-progress-bar{background:#dce3eb}progress::-webkit-pro
 @media(max-width:430px){.brand strong{font-size:19px}.brand-year{display:none}.explorer-logo{width:55px}.explorer-logo img{width:66px;height:66px}.topbar{gap:5px}.brand{gap:7px}}
 .assembly-card-main:hover{background:#e7edf4}
 .group-actions button:last-child{background:var(--text);border-color:var(--text);color:#fff}.group-actions button:last-child:hover{background:var(--blue);border-color:var(--blue)}
+
+.language-switch{display:inline-flex;gap:2px;padding:2px;border:1px solid #c5ced7;border-radius:24px;white-space:nowrap;flex-shrink:0}
+.language-switch button{border:0;border-radius:22px;background:transparent;color:#233b53;font:500 12px/1.2 'DM Sans',sans-serif;padding:8px 9px;min-height:31px;cursor:pointer}
+.language-switch button[aria-pressed="true"]{background:#122234;color:#fff}
+.language-switch button:focus-visible{outline:2px solid #326aff;outline-offset:2px}
+html[lang="en"] .catalog-heading h1{font-size:25px;letter-spacing:-.04em}
+html[lang="en"] .stage-caption h2{font-size:clamp(22px,2.4vw,38px)}
+html[lang="en"] .stage-caption p{max-width:460px}
+html[lang="en"] .part-annotation strong{font-size:12px;line-height:1.2}
+html[lang="en"] .part-annotation span{font-size:10px}
+@media(max-width:760px){.topbar{flex-wrap:wrap;height:auto;min-height:68px;padding:10px 14px;gap:8px}.topbar .header-actions{gap:5px;margin-left:auto}.topbar .brand-sub{display:none}.topbar .language-switch button{font-size:11px;padding:7px}.topbar .outline,.topbar .quiet{font-size:11px;padding:8px}.brand strong{font-size:15px}.brand .explorer-logo{width:44px}.workspace{height:calc(100dvh - 76px)}html[lang="en"] .stage-caption h2{font-size:22px}.view-tools{gap:2px}.view-button{padding:6px;font-size:11px}}
