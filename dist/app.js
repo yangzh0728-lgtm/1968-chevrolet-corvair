@@ -1,8 +1,10 @@
 import {t} from './language.js';
+import {closeDropdowns} from './navigation.js?v=1';
 const menuToggle=document.querySelector('.menu-toggle');
 const menu=document.querySelector('#mobile-menu');
-function closeMenu(){menu.hidden=true;menuToggle.setAttribute('aria-expanded','false');menuToggle.setAttribute('aria-label','Open navigation');}
+function closeMenu(){closeDropdowns();menu.hidden=true;menuToggle.setAttribute('aria-expanded','false');menuToggle.setAttribute('aria-label','Open navigation');}
 menuToggle?.addEventListener('click',()=>{const open=menu.hidden;menu.hidden=!open;menuToggle.setAttribute('aria-expanded',String(open));menuToggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');});
+menu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){closeMenu();menuToggle.focus();}});
 const motionButton=document.querySelector('.motion-toggle');
 let paused=false;try{paused=localStorage.getItem('legacy-motion')==='paused';}catch{}
@@ -14,7 +16,9 @@ document.querySelector('.back-top')?.addEventListener('click',e=>{e.preventDefau
 const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
 const canAnimate=()=>!paused&&!reduceMotion.matches;
 const currentPath=location.pathname.replace(/\/$/,'')||'/';
-for(const link of document.querySelectorAll('.site-header nav a,.mobile-menu a')){const path=new URL(link.href).pathname.replace(/\/$/,'')||'/';if(currentPath===path||(path!=='/'&&currentPath.startsWith(path+'/')))link.setAttribute('aria-current','page');}
+for(const link of document.querySelectorAll('.site-header nav a,.mobile-menu a')){const url=new URL(link.href);const path=url.pathname.replace(/\/$/,'')||'/';if(currentPath===path&&!url.hash)link.setAttribute('aria-current','page');}
+const activeGroup=currentPath.startsWith('/restoration')?'build':currentPath.startsWith('/explore')?'explore':currentPath.startsWith('/journal')?'journal':['/about','/team','/contact'].includes(currentPath)?'story':null;
+for(const group of document.querySelectorAll('[data-nav-group]'))group.classList.toggle('nav-current',group.dataset.navGroup===activeGroup);
 const revealTargets=document.querySelectorAll('.person-profile,.people-intro>div,.calm-story>div,.calm-explore>div,.note-list>a,.intro h2,.intro-bottom,.section-heading,.home-explore>div,.journal-card,.value-row,.team-section>div,.vision-section h2,.contact-strip,.roadmap-preview>a');
 const revealObserver=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){entry.target.classList.remove('reveal-pending');entry.target.classList.add('revealed');revealObserver.unobserve(entry.target);}},{threshold:.08});
 for(const el of revealTargets){if(canAnimate())el.classList.add('reveal-pending');revealObserver.observe(el);}
