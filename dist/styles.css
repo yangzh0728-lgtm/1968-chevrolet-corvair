@@ -153,3 +153,28 @@ html[lang="zh-CN"] .page-hero h1{font-size:clamp(3rem,7.5vw,7rem)}
 html[lang="zh-CN"] .eyebrow{letter-spacing:.1em}
 html[lang="zh-CN"] .article-body p{line-height:1.9}
 @media(max-width:700px){.site-header>.language-switch{margin-left:auto;margin-right:14px}.language-switch button{padding:8px 10px}.site-header .logo-brand{flex-shrink:0}html[lang="zh-CN"] .reveal-heading h1{font-size:clamp(2.65rem,10vw,4.4rem)}}
+
+/* Team portraits use the photo regions in the supplied team slides, unchanged. */
+.people-hero h1{max-width:none}
+.people-hero .page-hero-bottom p{max-width:590px}
+.people-intro{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,90px);align-items:center;padding-bottom:70px}
+.team-group-photo{position:relative;aspect-ratio:702/430;overflow:hidden;background:#dbe2e6;border-radius:3px}
+.team-group-photo img{position:absolute;width:153.846154%;max-width:none;height:auto;left:-26.495727%;top:-173.255814%}
+.people-intro h2{font-size:clamp(35px,3.8vw,60px);line-height:1.08;max-width:540px;margin-top:24px}
+.people-intro h2 span{color:#637c91}
+.people-intro .eyebrow{font-size:12px}
+.people-roster{padding-top:0;padding-bottom:60px}
+.person-profile{display:grid;grid-template-columns:240px minmax(0,1fr);gap:clamp(36px,6vw,96px);align-items:center;padding:64px 0;border-top:1px solid var(--line)}
+.person-portrait{position:relative;width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;background:#dce3ea}
+.person-portrait img{position:absolute;width:var(--portrait-width);max-width:none;height:auto;left:var(--portrait-left);top:var(--portrait-top)}
+.person-heading{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:24px}
+.person-heading h2{font-size:clamp(40px,4.6vw,68px);text-transform:none;line-height:1.05;letter-spacing:-.02em}
+.person-number{font-size:12px;letter-spacing:.1em;color:#657d91;font-variant-numeric:tabular-nums}
+.person-role{background:#e0e7f1;color:#254b7e;border-radius:30px;padding:5px 14px;font-size:14px}
+.person-bio{max-width:760px;font-size:16px;line-height:1.85;color:#4e6070}
+.person-email{display:inline-flex;align-items:center;gap:24px;max-width:100%;margin-top:25px;padding:8px 0;border-bottom:1px solid #aab8c2;font-size:14px;overflow-wrap:anywhere;transition:color .25s,border-color .25s}
+.person-email:hover{color:var(--blue);border-color:var(--blue)}
+.person-email span{flex-shrink:0;transition:transform .25s}.person-email:hover span{transform:translate(3px,-3px)}
+@media(min-width:701px) and (max-width:960px){.mobile-menu{top:110px}.site-header nav{display:none}.site-header .menu-toggle{display:block}.site-header>.language-switch{margin-left:auto;margin-right:12px}}
+@media(max-width:850px){.people-intro{grid-template-columns:1fr;gap:28px}.people-intro h2{max-width:650px}.person-profile{grid-template-columns:180px minmax(0,1fr);gap:32px;align-items:start}.person-heading{gap:12px}.person-bio{font-size:16px}}
+@media(max-width:600px){.people-intro{padding-top:40px;padding-bottom:44px}.people-intro h2{font-size:36px;margin-top:18px}.person-profile{grid-template-columns:1fr;gap:28px;padding:42px 0}.person-portrait{width:190px}.person-heading{margin-bottom:18px}.person-heading h2{font-size:46px}.person-email{gap:12px;font-size:14px}.people-roster{padding-bottom:28px}}

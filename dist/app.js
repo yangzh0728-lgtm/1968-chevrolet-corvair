@@ -15,7 +15,7 @@ const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
 const canAnimate=()=>!paused&&!reduceMotion.matches;
 const currentPath=location.pathname.replace(/\/$/,'')||'/';
 for(const link of document.querySelectorAll('.site-header nav a,.mobile-menu a')){const path=new URL(link.href).pathname.replace(/\/$/,'')||'/';if(currentPath===path||(path!=='/'&&currentPath.startsWith(path+'/')))link.setAttribute('aria-current','page');}
-const revealTargets=document.querySelectorAll('.calm-story>div,.calm-explore>div,.note-list>a,.intro h2,.intro-bottom,.section-heading,.home-explore>div,.journal-card,.value-row,.team-section>div,.vision-section h2,.contact-strip,.roadmap-preview>a');
+const revealTargets=document.querySelectorAll('.person-profile,.people-intro>div,.calm-story>div,.calm-explore>div,.note-list>a,.intro h2,.intro-bottom,.section-heading,.home-explore>div,.journal-card,.value-row,.team-section>div,.vision-section h2,.contact-strip,.roadmap-preview>a');
 const revealObserver=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){entry.target.classList.remove('reveal-pending');entry.target.classList.add('revealed');revealObserver.unobserve(entry.target);}},{threshold:.08});
 for(const el of revealTargets){if(canAnimate())el.classList.add('reveal-pending');revealObserver.observe(el);}
 motionButton?.addEventListener('click',()=>{if(paused)document.querySelectorAll('.reveal-pending').forEach(el=>el.classList.remove('reveal-pending'));});
@@ -45,7 +45,7 @@ document.querySelector('#copy-email')?.addEventListener('click',async()=>{const 
 
 if(document.querySelector('#viewer-container'))import('./explorer.js?v=language-1');
 
-matchMedia('(min-width: 701px)').addEventListener('change',e=>{if(e.matches)closeMenu();});
+matchMedia('(min-width: 961px)').addEventListener('change',e=>{if(e.matches)closeMenu();});
 
 if(document.querySelector('[data-car-reveal]')) import('./hero-reveal.js');
 

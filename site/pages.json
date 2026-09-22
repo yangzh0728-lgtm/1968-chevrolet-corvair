@@ -1,12 +1,68 @@
 [
- {"source":"home.html","path":"","title":"Legacy Garage 26 — Bringing 1968 Back to Life","description":"A youth-led restoration of a 1968 Chevrolet Corvair. Follow the journey, meet the project, and explore the car in 3D."},
- {"source":"restoration.html","path":"restoration","title":"The Restoration — Legacy Garage 26","description":"Explore our restoration roadmap, from documenting the starting condition to the goal of getting our 1968 Corvair back on the road."},
- {"source":"explore.html","path":"explore","title":"Explore the Corvair in 3D — Legacy Garage 26","description":"Rotate, inspect, and break down the Corvair model. Explore 13 functional assemblies and a searchable parts directory."},
- {"source":"journal.html","path":"journal","title":"The Journal — Legacy Garage 26","description":"Project notes, learning guides, and the thinking behind our Corvair restoration."},
- {"source":"about.html","path":"about","title":"Our Story — Legacy Garage 26","description":"Young builders, shared knowledge, and one 1968 Corvair. Learn why Legacy Garage 26 exists."},
- {"source":"contact.html","path":"contact","title":"Get in Touch — Legacy Garage 26","description":"Share a Corvair story, offer knowledge, or talk about collaborating with Legacy Garage 26."},
- {"source":"credits.html","path":"credits","title":"Image Credits — Legacy Garage 26","description":"Photography credits, licenses, and model information for Legacy Garage 26."},
- {"source":"why-one-car.html","path":"journal/why-one-car","title":"Why We're Starting with One Car — Legacy Garage 26","description":"The idea behind Legacy Garage 26: a shared project, hands-on learning, and a story that can grow beyond one car."},
- {"source":"model-guide.html","path":"journal/model-guide","title":"A Field Guide to Corvair Anatomy — Legacy Garage 26","description":"How to use the interactive Corvair model to explore assemblies and understand the parts around them."},
- {"source":"documenting.html","path":"journal/documenting-the-build","title":"Keeping a Record of the Build — Legacy Garage 26","description":"Our plan for documenting discoveries, decisions, and lessons throughout the Corvair restoration."}
+  {
+    "source": "home.html",
+    "path": "",
+    "title": "Legacy Garage 26 — Bringing 1968 Back to Life",
+    "description": "A youth-led restoration of a 1968 Chevrolet Corvair. Follow the journey, meet the project, and explore the car in 3D."
+  },
+  {
+    "source": "restoration.html",
+    "path": "restoration",
+    "title": "The Restoration — Legacy Garage 26",
+    "description": "Explore our restoration roadmap, from documenting the starting condition to the goal of getting our 1968 Corvair back on the road."
+  },
+  {
+    "source": "explore.html",
+    "path": "explore",
+    "title": "Explore the Corvair in 3D — Legacy Garage 26",
+    "description": "Rotate, inspect, and break down the Corvair model. Explore 13 functional assemblies and a searchable parts directory."
+  },
+  {
+    "source": "journal.html",
+    "path": "journal",
+    "title": "The Journal — Legacy Garage 26",
+    "description": "Project notes, learning guides, and the thinking behind our Corvair restoration."
+  },
+  {
+    "source": "about.html",
+    "path": "about",
+    "title": "Our Story — Legacy Garage 26",
+    "description": "Young builders, shared knowledge, and one 1968 Corvair. Learn why Legacy Garage 26 exists."
+  },
+  {
+    "source": "team.html",
+    "path": "team",
+    "title": "Meet the Team — Legacy Garage 26",
+    "description": "Meet the people behind Legacy Garage 26: their stories, photos, and contact details."
+  },
+  {
+    "source": "contact.html",
+    "path": "contact",
+    "title": "Get in Touch — Legacy Garage 26",
+    "description": "Share a Corvair story, offer knowledge, or talk about collaborating with Legacy Garage 26."
+  },
+  {
+    "source": "credits.html",
+    "path": "credits",
+    "title": "Image Credits — Legacy Garage 26",
+    "description": "Photography credits, licenses, and model information for Legacy Garage 26."
+  },
+  {
+    "source": "why-one-car.html",
+    "path": "journal/why-one-car",
+    "title": "Why We're Starting with One Car — Legacy Garage 26",
+    "description": "The idea behind Legacy Garage 26: a shared project, hands-on learning, and a story that can grow beyond one car."
+  },
+  {
+    "source": "model-guide.html",
+    "path": "journal/model-guide",
+    "title": "A Field Guide to Corvair Anatomy — Legacy Garage 26",
+    "description": "How to use the interactive Corvair model to explore assemblies and understand the parts around them."
+  },
+  {
+    "source": "documenting.html",
+    "path": "journal/documenting-the-build",
+    "title": "Keeping a Record of the Build — Legacy Garage 26",
+    "description": "Our plan for documenting discoveries, decisions, and lessons throughout the Corvair restoration."
+  }
 ]
