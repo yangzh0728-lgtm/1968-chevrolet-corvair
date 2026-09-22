@@ -36,8 +36,11 @@
 .lab-panel{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(28px,5vw,80px);align-items:center;margin-bottom:30px}
 .lab-panel[hidden],.lab-tabs[hidden]{display:none}
 .lab-visual{position:relative;aspect-ratio:1.6;overflow:hidden;background:#ececec;border-radius:3px;isolation:isolate}
-/* Keep the complete model in frame at every panel size; the entrance only scales inward. */
+/* The body view keeps the whole car; mechanical tabs focus on their own assembly. */
 .lab-visual img{width:100%;height:100%;object-fit:contain;object-position:center;transform:none}
+/* Source image is 1600 × 1000. These 8:5 windows preserve the complete selected assembly. */
+.lab-engine-view img{position:absolute;max-width:none;width:250%;height:auto;left:-120.3125%;top:-72.5%;transform-origin:68.125% 49%}
+.lab-suspension-view img{position:absolute;max-width:none;width:285.714286%;height:auto;left:-42.857143%;top:-134.285714%;transform-origin:32.5% 64.5%}
 .lab-visual::after{content:'';position:absolute;left:-10%;top:0;bottom:0;width:15%;background:linear-gradient(90deg,transparent,#326aff22,transparent);border-right:1px solid #326aff66;opacity:0;pointer-events:none}
 .lab-enhanced .lab-panel:not([hidden]) .lab-visual::after{animation:garage-scan 1.2s .1s ease-in-out both}
 .lab-enhanced .lab-panel:not([hidden]) .lab-visual img{animation:inspection-in .9s cubic-bezier(.16,1,.3,1) both}
