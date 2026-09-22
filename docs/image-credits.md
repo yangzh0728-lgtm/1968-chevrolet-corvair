@@ -14,3 +14,9 @@ These are reference vehicles, not photographs of the user's restoration car.
 - Notes: full car, front three-quarter, burgundy finish, green trees. Source establishes 1968 Corvair but does not establish Monza trim; avoid identifying as Monza.
 
 The website resizes and crops the photograph and applies CSS color treatment. The credit is visible at /credits/, linked from the homepage photograph and footer.
+
+## Mechanical reveal correction
+- Website file: `dist/assets/corvair-mechanical-corrected.webp`
+- Original model render retained at `dist/assets/corvair-mechanical.webp`.
+- Edited with the built-in image generation tool to remove the extra elevated tire above the rear engine. Converted to 1600 × 1000 WebP for the existing reveal layout.
+- Edit prompt: Remove ONLY the erroneous fifth wheel floating upright above and behind the rear engine (approximately x1008–1150, y324–418 in the source). Fill with matching studio background. Preserve the four existing road wheels, engine, battery, framing, perspective, scale, shadows, and colors. No text or watermark.

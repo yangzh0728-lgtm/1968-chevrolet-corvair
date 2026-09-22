@@ -16,6 +16,8 @@ export class PartLabels{
  constructor(viewer,container,onSelect,onAssembly){
   this.viewer=viewer;this.container=container;this.onSelect=onSelect;this.onAssembly=onAssembly;this.enabled=true;this.nodes=new Map();
   this.svg=document.createElementNS('http://www.w3.org/2000/svg','svg');this.svg.classList.add('annotation-lines');this.svg.setAttribute('aria-hidden','true');container.append(this.svg);
+  // Web fonts can change wrapping after the first model frame.
+  document.fonts?.ready.then(()=>{for(const node of this.nodes.values())node.measuredWidth=null;this.viewer.invalidate()});
  }
  update(state){
   this.state=state;
@@ -47,7 +49,14 @@ export class PartLabels{
    node.button.hidden=true;node.line.style.display='none';node.dot.style.display='none';
    const p=node.isGroup?this.viewer.projectAssembly(id.slice(2)):this.viewer.projectPart(id);if(!p||!p.visible)continue;
    if(mobile&&!node.selected&&points.length>=3)continue;
-   points.push({id,x:p.x,y:p.y,width:mobile?145:165,height:45,selected:node.selected});
+   const labelWidth=Math.min(mobile?166:196,width-inset.left-inset.right);
+   if(labelWidth<=0)continue;
+   if(node.measuredWidth!==labelWidth){
+    node.button.style.width=`${labelWidth}px`;node.button.hidden=false;
+    node.measuredHeight=Math.ceil(node.button.getBoundingClientRect().height);
+    node.measuredWidth=labelWidth;node.button.hidden=true;
+   }
+   points.push({id,x:p.x,y:p.y,width:labelWidth,height:node.measuredHeight,selected:node.selected});
   }
   const placed=layoutLabels(points,{width,height,top:inset.top,bottom:inset.bottom,left:inset.left,right:inset.right,exclude:model,maxCount:mobile?2:4});
   this.svg.setAttribute('viewBox',`0 0 ${width} ${height}`);

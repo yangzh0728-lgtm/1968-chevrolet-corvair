@@ -64,5 +64,41 @@
     "path": "journal/documenting-the-build",
     "title": "Keeping a Record of the Build — Legacy Garage 26",
     "description": "Our plan for documenting discoveries, decisions, and lessons throughout the Corvair restoration."
+  },
+  {
+    "source": "interviews.html",
+    "path": "interviews",
+    "title": "Interviews — Legacy Garage 26",
+    "description": "Conversations with the people who know these cars, and the lessons we can carry forward."
+  },
+  {
+    "source": "videos.html",
+    "path": "videos",
+    "title": "Videos — Legacy Garage 26",
+    "description": "A future home for workshop films, project updates, and the moments between milestones."
+  },
+  {
+    "source": "history.html",
+    "path": "history",
+    "title": "Corvair history & culture — Legacy Garage 26",
+    "description": "A place to explore the Corvair’s history and the community keeping its story alive."
+  },
+  {
+    "source": "engineering.html",
+    "path": "engineering",
+    "title": "Engineering — Legacy Garage 26",
+    "description": "Explore the model today. Follow our engineering questions and workshop lessons as the project develops."
+  },
+  {
+    "source": "resources.html",
+    "path": "resources",
+    "title": "Resources — Legacy Garage 26",
+    "description": "A growing home for useful references, project documents, and tools for exploring the Corvair."
+  },
+  {
+    "source": "archive.html",
+    "path": "archive",
+    "title": "The Archive — Legacy Garage 26",
+    "description": "The build, the people, and what we learn. One lasting home for the Legacy Garage story."
   }
 ]

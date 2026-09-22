@@ -2,7 +2,7 @@ import {t,localize,english} from './language.js';
 import {AnatomyViewer} from './viewer.js?v=language-1';
 import {SYSTEMS} from './explosion.js';
 import {matchesPart,locationLabel,KIND_LABELS} from './part-info.js?v=language-1';
-import {PartLabels} from './labels.js?v=language-1';
+import {PartLabels} from './labels.js?v=text-layout-1';
 import {newViewState,enterAssembly,enterSystem,revealPart,toggleVisibility,restoreView} from './assemblies.js';
 const $=id=>document.getElementById(id),nf=new Intl.NumberFormat('zh-CN');
 localize(SYSTEMS);localize(KIND_LABELS);

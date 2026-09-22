@@ -76,3 +76,28 @@ html[lang="en"] .stage-caption p{max-width:460px}
 html[lang="en"] .part-annotation strong{font-size:12px;line-height:1.2}
 html[lang="en"] .part-annotation span{font-size:10px}
 @media(max-width:760px){.topbar{flex-wrap:wrap;height:auto;min-height:68px;padding:10px 14px;gap:8px}.topbar .header-actions{gap:5px;margin-left:auto}.topbar .brand-sub{display:none}.topbar .language-switch button{font-size:11px;padding:7px}.topbar .outline,.topbar .quiet{font-size:11px;padding:8px}.brand strong{font-size:15px}.brand .explorer-logo{width:44px}.workspace{height:calc(100dvh - 76px)}html[lang="en"] .stage-caption h2{font-size:22px}.view-tools{gap:2px}.view-button{padding:6px;font-size:11px}}
+
+/* Size callouts to their translated content; placement uses these real bounds. */
+.part-annotation{height:auto;min-height:48px;padding:8px 10px;overflow-wrap:anywhere}
+.part-annotation strong,html[lang="en"] .part-annotation strong{white-space:normal;overflow:visible;text-overflow:clip;font-size:12px;line-height:1.4;margin-top:4px}
+.part-annotation span,html[lang="en"] .part-annotation span{font-size:10px;line-height:1.4;letter-spacing:.01em}
+.part-row strong,.part-row small{white-space:normal;overflow-wrap:anywhere}
+.breadcrumb{min-width:0;flex-wrap:wrap;row-gap:2px}
+.view-tools{flex-shrink:0}
+.console-top{flex-wrap:wrap;row-gap:8px}
+.console-top>span{overflow-wrap:anywhere}
+#explode-output{white-space:nowrap}
+.console-bottom{gap:12px;align-items:center}
+#visible-count{line-height:1.5;text-align:right}
+@media(max-width:760px){.stage-top{align-items:flex-start;flex-wrap:wrap;row-gap:8px}.stage-caption{top:100px;max-width:calc(100% - 36px)}.console-top>span{max-width:none;flex:1 0 100%}.console-top .level-switch{margin-right:auto}.console-bottom{flex-wrap:wrap;row-gap:7px}.console-bottom #visible-count{margin-left:auto}.part-annotation{padding:7px 9px}.part-annotation strong,html[lang="en"] .part-annotation strong{font-size:11px}.part-annotation span,html[lang="en"] .part-annotation span{font-size:9px}}
+/* Let the sidebar reserve space for complete controls before scrolling results. */
+body{height:100dvh;display:flex;flex-direction:column}
+.topbar{flex:none}
+.workspace{flex:1;height:auto;min-height:0;position:relative}
+.group-summary{max-height:none;overflow:visible;padding-bottom:14px}
+.group-summary h2{font-size:15px}
+.group-summary>p{font-size:11px;line-height:1.65;margin-top:7px}
+.group-summary details[open]{max-height:120px;overflow:auto}
+.parts-catalog{overflow-y:auto}
+.parts-catalog>.part-list{min-height:85px}
+@media(max-width:760px){.catalog{top:0}.group-summary{max-height:none}.group-summary h2{font-size:16px}}
