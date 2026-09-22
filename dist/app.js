@@ -48,3 +48,5 @@ if(document.querySelector('#viewer-container'))import('./explorer.js?v=language-
 matchMedia('(min-width: 701px)').addEventListener('change',e=>{if(e.matches)closeMenu();});
 
 if(document.querySelector('[data-car-reveal]')) import('./hero-reveal.js');
+
+import('./motion.js?v=1');
