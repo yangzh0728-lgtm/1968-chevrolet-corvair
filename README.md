@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://www.legacygarage26.org/">
+    <img src="dist/assets/legacy-garage-logo.png" alt="Legacy Garage 26 logo" width="240">
+  </a>
+</p>
+
 # Legacy Garage 26
 
 **Old soul. New hands.**
