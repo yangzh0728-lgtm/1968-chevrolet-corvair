@@ -6,7 +6,7 @@
 
 # Legacy Garage 26
 
-**Old soul. New hands.**
+**Old enough to be classic. Young enough to turn heads.**
 
 The website and project archive for a youth-led restoration of a **1968 Chevrolet Corvair**, based in Reseda, California. Legacy Garage brings young builders and experienced Corvair enthusiasts together to learn through hands-on work and preserve what they discover along the way.
 
