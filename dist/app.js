@@ -1,4 +1,4 @@
-import {t} from './language.js';
+import {t} from './language.js?v=old-new-1';
 import {closeDropdowns} from './navigation.js?v=1';
 const menuToggle=document.querySelector('.menu-toggle');
 const menu=document.querySelector('#mobile-menu');
@@ -51,6 +51,6 @@ if(document.querySelector('#viewer-container'))import('./explorer.js?v=language-
 
 matchMedia('(min-width: 961px)').addEventListener('change',e=>{if(e.matches)closeMenu();});
 
-if(document.querySelector('[data-car-reveal]')) import('./hero-reveal.js');
+if(document.querySelector('[data-car-reveal]')) import('./hero-reveal.js?v=old-new-1');
 
-import('./motion.js?v=1');
+import('./motion.js?v=diamond-hover-1');

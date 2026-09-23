@@ -14,7 +14,7 @@ async function fixture({reduced = false, failedImage = false} = {}) {
       decode(){return failedImage?Promise.reject(Error('offline')):Promise.resolve();},getContext(){return null;},
       fire(name,event={}){this.events[name]?.(event);}};
   }
-  const selectors=['.reveal-stage','canvas','.reveal-exterior','.reveal-mechanical','input','.reveal-replay','.reveal-status','.reveal-controls'];
+  const selectors=['.reveal-stage','canvas','.reveal-exterior','.reveal-as-purchased','input','.reveal-replay','.reveal-status','.reveal-controls'];
   const elements=Object.fromEntries(selectors.map(s=>[s,element()])); const root=element(), body=element();
   root.querySelector=s=>elements[s]; root.style={setProperty(k,v){root.styles[k]=v;}};
   const doc={querySelector:()=>root,body,hidden:false,addEventListener(){}};
@@ -33,7 +33,19 @@ assert.equal(f.root.classList.contains('reveal-webgl'),false);
 assert.equal(f.root.classList.contains('reveal-ready'),true);
 f.advance(350);assert.equal(f.elements.input.value,'50','intro settles halfway');
 f.elements.input.value='100';f.elements.input.fire('input');f.advance(80);assert.equal(f.root.styles['--reveal'],'100%');
+assert.equal(f.elements.input.attrs['aria-valuetext'],'100% as-purchased view');
 f.elements.input.value='0';f.elements.input.fire('input');f.advance(80);assert.equal(f.root.styles['--reveal'],'0%');
+const stage=f.elements['.reveal-stage'];
+stage.fire('pointermove',{pointerType:'mouse',clientX:0,clientY:200});f.advance(100);
+assert.equal(f.root.styles['--reveal'],'100%','moving the mouse left reveals the old red car');
+stage.fire('pointermove',{pointerType:'mouse',clientX:800,clientY:200});f.advance(100);
+assert.equal(f.root.styles['--reveal'],'0%','moving the mouse right reveals the blue restoration vision');
+stage.fire('pointermove',{pointerType:'touch',clientX:0,clientY:200});f.advance(100);
+assert.equal(f.root.styles['--reveal'],'0%','touch scrolling without a drag does not move the comparison');
+stage.fire('pointerdown',{pointerType:'touch',pointerId:1,clientX:400,clientY:200});
+stage.fire('pointermove',{pointerType:'touch',clientX:0,clientY:200});f.advance(100);
+assert.equal(f.root.styles['--reveal'],'100%','dragging on touch reveals the old red car');
+stage.fire('pointerup');
 f.elements['.reveal-replay'].fire('click');f.advance(60);f.elements['.reveal-replay'].fire('click');f.advance(100);
 const frozen=f.root.styles['--reveal'];f.advance(100);assert.equal(f.root.styles['--reveal'],frozen,'pause holds its position');
 f.pause();assert.equal(f.elements['.reveal-replay'].textContent,'Switch view');
@@ -41,4 +53,4 @@ f.elements['.reveal-replay'].fire('click');f.advance();assert.equal(f.elements['
 const reduced=await fixture({reduced:true});reduced.advance(300);assert.equal(reduced.elements['.reveal-replay'].textContent,'Switch view');assert.equal(reduced.elements.input.value,'50','reduced motion skips intro');
 reduced.elements.input.value='100';reduced.elements.input.fire('input');reduced.advance();assert.equal(reduced.root.styles['--reveal'],'100%','reduced motion responds immediately');
 const offline=await fixture({failedImage:true});assert.equal(offline.elements['.reveal-controls'].hidden,true);assert.match(offline.elements['.reveal-status'].textContent,/unavailable/);
-console.log('PASS: fallback, intro, keyboard-input endpoints, pause, reduced motion and image-load failure.');
+console.log('PASS: old/new mouse and touch comparison, accessible values, fallback, intro, keyboard-input endpoints, pause, reduced motion and image-load failure.');

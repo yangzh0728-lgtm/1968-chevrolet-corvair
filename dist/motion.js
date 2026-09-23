@@ -1,6 +1,5 @@
 // Small, event-driven enhancements. No model download or perpetual animation loop.
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
 const allowed = () => !reduced.matches && !document.body.classList.contains('motion-paused');
 const lab = document.querySelector('[data-garage-lab]');
 if (lab) {
@@ -56,16 +55,15 @@ reduced.addEventListener('change', schedule);
 new MutationObserver(schedule).observe(document.body, {attributes: true, attributeFilter: ['class']});
 schedule();
 
-// Pointer effects move the contents, leaving the hit area stable.
-for (const button of document.querySelectorAll('.button')) {
-  const arrow = button.querySelector('span[aria-hidden]');
+// The marker changes shape; the link's label and click area stay still.
+for (const action of document.querySelectorAll('.button,.text-link')) {
+  const arrow = [...action.children].find(child =>
+    child.tagName === 'SPAN' && /^[↗→↓]$/.test(child.textContent.trim())
+  );
   if (!arrow) continue;
-  button.addEventListener('pointermove', event => {
-    if (!allowed() || !finePointer.matches) return;
-    const box = button.getBoundingClientRect();
-    arrow.style.translate = `${(event.clientX - box.left - box.width / 2) * .06}px ${(event.clientY - box.top - box.height / 2) * .12}px`;
-  });
-  button.addEventListener('pointerleave', () => { arrow.style.translate = ''; });
+  action.classList.add('shape-action');
+  arrow.classList.add('action-mark');
+  arrow.setAttribute('aria-hidden', 'true');
 }
 
 // Reveal each section only once and stop observing it immediately afterwards.

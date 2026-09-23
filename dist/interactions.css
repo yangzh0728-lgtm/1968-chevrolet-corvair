@@ -1,0 +1,94 @@
+/* Square-to-diamond action markers, in the existing navy and blue palette. */
+.shape-action {
+  --marker-accent: #2859cf;
+  --marker-line: #6a7b8b;
+  --marker-ease: cubic-bezier(.2,.75,.25,1);
+  align-items: center;
+}
+.button-dark.shape-action {
+  --marker-accent: #fff;
+  --marker-line: #c0cedf;
+}
+.garage-lab .text-link.shape-action {
+  --marker-accent: #a8c0ff;
+  --marker-line: #a5b5c7;
+}
+.shape-action > .action-mark {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  font-size: 21px;
+  line-height: 1;
+  color: transparent;
+  transform: none;
+  translate: none;
+  transition: color .2s;
+}
+.shape-action > .action-mark::before,
+.shape-action > .action-mark::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+.shape-action > .action-mark::before {
+  inset: 4px;
+  border: 1px solid var(--marker-line);
+  transform: rotate(0deg) scale(1);
+  transition: transform .42s var(--marker-ease), border-color .25s;
+}
+.shape-action > .action-mark::after {
+  width: 5px;
+  height: 5px;
+  background: var(--marker-accent);
+  transition: opacity .15s, transform .3s var(--marker-ease);
+}
+.button.shape-action:hover,
+.button.shape-action:active {
+  transform: none;
+  box-shadow: none;
+}
+.button.shape-action::after { display: none; }
+.shape-action:hover > .action-mark { transform: none; }
+.text-link.shape-action {
+  gap: 22px;
+  max-width: 100%;
+  white-space: normal;
+  transition: color .25s, border-color .25s;
+}
+.shape-action:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 5px;
+}
+.shape-action:focus-visible > .action-mark { color: var(--marker-accent); }
+.shape-action:focus-visible > .action-mark::before {
+  border-color: var(--marker-accent);
+  transform: rotate(45deg) scale(1.18);
+}
+.shape-action:focus-visible > .action-mark::after { opacity: 0; transform: scale(.3); }
+@media (hover: hover) and (pointer: fine) {
+  .shape-action:not(:disabled):hover > .action-mark { color: var(--marker-accent); }
+  .shape-action:not(:disabled):hover > .action-mark::before {
+    border-color: var(--marker-accent);
+    transform: rotate(45deg) scale(1.18);
+  }
+  .shape-action:not(:disabled):hover > .action-mark::after { opacity: 0; transform: scale(.3); }
+  .text-link.shape-action:hover { color: var(--marker-accent); border-color: var(--marker-accent); }
+}
+@media (hover: none), (pointer: coarse) {
+  .shape-action > .action-mark { color: var(--marker-accent); }
+  .shape-action > .action-mark::after { display: none; }
+}
+/* Motion can be paused without hiding the action or its focus indication. */
+.motion-paused .shape-action > .action-mark,
+.motion-paused .shape-action > .action-mark::before,
+.motion-paused .shape-action > .action-mark::after { transition: none; }
+.motion-paused .shape-action > .action-mark::before { transform: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .shape-action > .action-mark,
+  .shape-action > .action-mark::before,
+  .shape-action > .action-mark::after { transition: none; }
+  .shape-action > .action-mark::before { transform: none !important; }
+}

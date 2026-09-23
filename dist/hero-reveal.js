@@ -1,4 +1,4 @@
-// Two aligned studio renders of the same model, revealed through a fluid mask.
+// Blue restoration vision and red as-purchased car, aligned in the same studio.
 // No model download is required on the opening page.
 const root = document.querySelector('[data-car-reveal]');
 if (root) init(root);
@@ -7,7 +7,7 @@ async function init(root) {
   const stage = root.querySelector('.reveal-stage');
   const canvas = root.querySelector('canvas');
   const exterior = root.querySelector('.reveal-exterior');
-  const mechanical = root.querySelector('.reveal-mechanical');
+  const asPurchased = root.querySelector('.reveal-as-purchased');
   const slider = root.querySelector('input');
   const replay = root.querySelector('.reveal-replay');
   const status = root.querySelector('.reveal-status');
@@ -20,15 +20,15 @@ async function init(root) {
 
   function updateLabel(value) {
     slider.value = String(Math.round(value * 100));
-    slider.setAttribute('aria-valuetext', `${Math.round(value * 100)}% mechanical view`);
+    slider.setAttribute('aria-valuetext', `${Math.round(value * 100)}% as-purchased view`);
   }
   function requestDraw() {
     if (!frame && visible && !document.hidden) frame = requestAnimationFrame(tick);
   }
   function stopIntro() {
     introStart = null;
-    replay.textContent = canAnimate() ? 'Replay reveal' : 'Switch view';
-    replay.setAttribute('aria-label', canAnimate() ? 'Replay the opening car reveal' : 'Switch between exterior and mechanical views');
+    replay.textContent = canAnimate() ? 'Replay comparison' : 'Switch view';
+    replay.setAttribute('aria-label', canAnimate() ? 'Replay the old and new car comparison' : 'Switch between the restoration vision and the car as purchased');
   }
   function tick(now) {
     frame = 0;
@@ -36,7 +36,7 @@ async function init(root) {
     lastTime = now;
     if (introStart !== null) {
       const t = (now - introStart) / 1000;
-      // Let the exterior settle, reveal the engineering, then meet halfway.
+      // Show the blue vision, reveal the old red car, then meet halfway.
       target = t < .45 ? 0 : t < 2.15 ? .94 * ease((t - .45) / 1.7)
         : t < 2.55 ? .94 : .94 - .44 * ease(Math.min(1, (t - 2.55) / 1.2));
       updateLabel(target);
@@ -57,7 +57,7 @@ async function init(root) {
   slider.addEventListener('input', () => setValue(Number(slider.value) / 100));
   replay.addEventListener('click', () => {
     if (introStart !== null) { stopIntro(); target = current; updateLabel(target); }
-    else if (canAnimate()) { current = target = 0; introStart = performance.now(); replay.textContent = 'Pause reveal'; replay.setAttribute('aria-label', 'Pause the opening car reveal'); }
+    else if (canAnimate()) { current = target = 0; introStart = performance.now(); replay.textContent = 'Pause comparison'; replay.setAttribute('aria-label', 'Pause the old and new car comparison'); }
     else { setValue(target < .5 ? 1 : 0); }
     requestDraw();
   });
@@ -78,8 +78,8 @@ async function init(root) {
   for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) stage.addEventListener(type, () => { dragging = false; });
   function motionChanged() {
     if (!canAnimate()) { stopIntro(); current = target; }
-    replay.textContent = canAnimate() ? 'Replay reveal' : 'Switch view';
-    replay.setAttribute('aria-label', canAnimate() ? 'Replay the opening car reveal' : 'Switch between exterior and mechanical views');
+    replay.textContent = canAnimate() ? 'Replay comparison' : 'Switch view';
+    replay.setAttribute('aria-label', canAnimate() ? 'Replay the old and new car comparison' : 'Switch between the restoration vision and the car as purchased');
     requestDraw();
   }
   reduce.addEventListener('change', motionChanged);
@@ -95,15 +95,15 @@ async function init(root) {
   });
 
   try {
-    await Promise.all([exterior.decode(), mechanical.decode()]);
+    await Promise.all([exterior.decode(), asPurchased.decode()]);
   } catch {
-    status.textContent = 'The interactive preview is unavailable. Explore the full model below.';
+    status.textContent = 'The comparison is unavailable. Explore the full model below.';
     return;
   }
   try {
     gl = canvas.getContext('webgl', {alpha: false, antialias: false, powerPreference: 'low-power'});
     if (gl) {
-      drawGL = createRenderer(gl, exterior, mechanical);
+      drawGL = createRenderer(gl, exterior, asPurchased);
       root.classList.add('reveal-webgl');
     }
   } catch { gl = null; drawGL = null; }
@@ -123,15 +123,15 @@ async function init(root) {
   });
   root.classList.add('reveal-ready');
   root.querySelector('.reveal-controls').hidden = false;
-  status.textContent = matchMedia('(pointer: fine)').matches ? 'Move across the car to look inside.' : 'Swipe across the car to look inside.';
+  status.textContent = matchMedia('(pointer: fine)').matches ? 'Move across the car to compare old and new.' : 'Swipe across the car to compare old and new.';
   if (canAnimate() && visible && !document.hidden) {
-    current = target = 0; introStart = performance.now(); replay.textContent = 'Pause reveal'; replay.setAttribute('aria-label', 'Pause the opening car reveal');
+    current = target = 0; introStart = performance.now(); replay.textContent = 'Pause comparison'; replay.setAttribute('aria-label', 'Pause the old and new car comparison');
   }
   else motionChanged();
   updateLabel(target); requestDraw();
 }
 
-function createRenderer(gl, exterior, mechanical) {
+function createRenderer(gl, exterior, asPurchased) {
   const vertex = `attribute vec2 position; varying vec2 uv; void main(){uv=position*.5+.5;gl_Position=vec4(position,0.,1.);}`;
   const fragment = `precision mediump float;
     varying vec2 uv; uniform sampler2D outsideImage; uniform sampler2D insideImage;
@@ -167,7 +167,7 @@ function createRenderer(gl, exterior, mechanical) {
   const buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
   const position = gl.getAttribLocation(program, 'position'); gl.enableVertexAttribArray(position); gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-  [exterior, mechanical].forEach((image, index) => {
+  [exterior, asPurchased].forEach((image, index) => {
     gl.activeTexture(gl.TEXTURE0 + index); gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);

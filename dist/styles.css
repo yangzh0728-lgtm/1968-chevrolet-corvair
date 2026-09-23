@@ -106,8 +106,8 @@ h2{font-size:clamp(40px,4.5vw,66px);line-height:1.08}
 .reveal-stage{position:relative;width:100%;max-width:1400px;height:clamp(300px,39vw,500px);margin:-5px auto 0;touch-action:pan-y;cursor:ew-resize;isolation:isolate;overflow:hidden;background:#ececec;mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent)}
 .reveal-stage>img,.reveal-stage>canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .reveal-stage>canvas{display:none}
-.reveal-stage>.reveal-mechanical{visibility:hidden;clip-path:inset(0 0 0 calc(100% - var(--reveal,50%)))}
-.reveal-ready .reveal-mechanical{visibility:visible}
+.reveal-stage>.reveal-as-purchased{visibility:hidden;clip-path:inset(0 0 0 calc(100% - var(--reveal,50%)))}
+.reveal-ready .reveal-as-purchased{visibility:visible}
 .reveal-webgl .reveal-stage>canvas{display:block}
 .reveal-webgl .reveal-stage>img{visibility:hidden}
 .reveal-interaction{position:relative;max-width:840px;margin:-5px auto 0;text-align:center}
@@ -280,3 +280,42 @@ a.social-card:hover .social-arrow{transform:translate(3px,-3px)}
 .contact-social-heading p{font-size:17px;line-height:1.8}
 .contact-social .social-card{min-height:140px}
 @media(max-width:700px){.social-cards{grid-template-columns:1fr;gap:12px}.social-card{padding:20px;gap:16px;min-height:100px}.social-card-title{font-size:24px}.social-card-detail{font-size:14px}.social-icon{width:44px;height:44px}.footer-social{padding-top:26px}.contact-social .social-card{min-height:110px}.contact-social-heading p{font-size:16px}}
+/* Keep the group's name visible alongside its mark at every screen size. */
+.site-header{gap:24px}
+.site-header .logo-brand{gap:14px;flex-shrink:0}
+.brand-name{display:flex;flex-direction:column;font:600 32px/.98 var(--display);letter-spacing:.045em;white-space:nowrap;color:var(--ink)}
+.brand-year{color:#687e90}
+.site-header .primary-nav{margin-left:auto;gap:clamp(18px,2vw,32px)}
+.site-header>.language-switch{margin-left:0;margin-right:0}
+@media(min-width:961px) and (max-width:1150px){
+ .site-header{gap:18px}
+ .site-header .logo-brand{gap:10px}
+ .site-header .logo-crop{width:84px;height:90px}
+ .site-header .logo-crop img{width:90px;height:90px}
+ .brand-name{font-size:27px}
+ .site-header .primary-nav{gap:18px;font-size:13px}
+}
+@media(min-width:701px) and (max-width:960px){
+ .brand-name{display:block;font-size:clamp(28px,3.8vw,36px)}
+ .site-header>.language-switch{margin-left:auto}
+ .site-header .menu-toggle{padding:12px}
+}
+@media(max-width:700px){
+ .site-header{gap:10px;padding-inline:16px}
+ .site-header .logo-brand{gap:8px}
+ .site-header .logo-crop{width:64px;height:76px}
+ .site-header .logo-crop img{width:70px;height:70px}
+ .brand-name{font-size:24px;letter-spacing:.025em;line-height:1.02}
+ .site-header>.language-switch{margin-left:auto;margin-right:0}
+ .site-header .language-switch button{font-size:12px;padding:8px;min-height:34px}
+ .site-header .menu-toggle{padding:10px;flex-shrink:0}
+}
+@media(max-width:374px){
+ .site-header{gap:6px;padding-inline:12px}
+ .site-header .logo-brand{gap:5px}
+ .site-header .logo-crop{width:48px}
+ .site-header .logo-crop img{width:54px;height:54px}
+ .brand-name{font-size:21px}
+ .site-header .language-switch button{padding:8px 6px}
+ .site-header .menu-toggle{padding:10px 6px}
+}
