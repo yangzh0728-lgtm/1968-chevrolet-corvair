@@ -32,6 +32,7 @@ Instagram shares short updates and helps people discover the project. The websit
 - **Meet the team:** portraits, biographies, supplied contact details, and Sam’s founder role.
 - **Restoration roadmap and journal:** planned stages, searchable project notes, and category filters.
 - **Responsive navigation and motion controls:** desktop dropdowns, mobile navigation, keyboard controls, a Pause motion option, and support for reduced-motion preferences.
+- **Animated branding and mouse feedback:** a single-line depth-effect wordmark, a flowing blue pointer trail, orbiting highlights on buttons, and click ripples. Pointer effects are disabled on touch screens and when motion is paused or reduced.
 - **Contact and social links:** email drafts, Instagram, and Facebook.
 
 The detailed 3D viewer loads on demand. Its model assets total approximately **88 MB**, so opening it can take longer on a slow connection. The homepage comparison uses lightweight rendered images instead.
@@ -120,9 +121,10 @@ python3 scripts/verify-site.py
 node scripts/test-language.mjs
 node scripts/test-hero-reveal.mjs
 node scripts/test-label-layout.mjs
+node scripts/test-pointer-trail.mjs
 ```
 
-These checks cover local links and anchors, duplicate IDs, JavaScript syntax, model asset sizes, language switching, old/new comparison controls, motion preferences, and responsive model-label placement.
+These checks cover local links and anchors, duplicate IDs, JavaScript syntax, model asset sizes, language switching, old/new comparison controls, pointer interaction states, motion preferences, and responsive model-label placement.
 
 Before releasing interface changes, also check the affected pages in a browser at desktop and phone widths, including keyboard navigation and reduced motion. The automated checks do not replace visual review or a full WebGL viewer check.
 
@@ -138,6 +140,7 @@ The live website is hosted on **Vercel**, connected to this repository’s `main
 - The red as-purchased illustration reconstructs the project car from team photographs. The blue illustration represents the restoration vision.
 - The separate reference photograph by **Don O’Brien** is licensed under **CC BY 2.0** and depicts a reference vehicle, not the team’s restoration car. See [image credits](docs/image-credits.md) and the website’s [credits page](https://www.legacygarage26.org/credits/).
 - The viewer includes **Three.js** under its [MIT license](dist/anatomy/vendor/THREE-LICENSE.txt).
+- The header depth effect is adapted from **React Bits Depth Text**; its [license and attribution](dist/vendor/REACT-BITS-LICENSE.txt) are included with the site.
 - The 3D model is an educational visual reconstruction, not manufacturing CAD, factory specifications, or a verified workshop procedure.
 
 This repository does not currently specify a project-wide license. Third-party licenses and image credits apply to their respective assets.

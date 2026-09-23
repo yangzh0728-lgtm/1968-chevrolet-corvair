@@ -54,3 +54,7 @@ matchMedia('(min-width: 961px)').addEventListener('change',e=>{if(e.matches)clos
 if(document.querySelector('[data-car-reveal]')) import('./hero-reveal.js?v=old-new-1');
 
 import('./motion.js?v=diamond-hover-1');
+
+import('./brand-depth.js?v=1');
+
+import('./pointer-trail.js?v=fluid-2');

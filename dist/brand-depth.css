@@ -1,0 +1,10 @@
+/* Adapted from React Bits Depth Text. See vendor/REACT-BITS-LICENSE.txt. */
+.depth-brand{perspective:900px;perspective-origin:50% 48%;isolation:isolate}
+.depth-brand-stage{position:relative;display:inline-grid;transform-style:preserve-3d;transform:rotateX(-2.4deg) rotateY(3.15deg);transform-origin:center}
+.depth-brand-layer,.depth-brand-face{grid-area:1/1;display:inline-block;white-space:nowrap;backface-visibility:hidden;font:inherit;letter-spacing:inherit;line-height:inherit;user-select:none}
+.depth-brand-layer{position:absolute;inset:0;pointer-events:none;transform:translateZ(calc(var(--layer) * -.028em));color:color-mix(in srgb,#122234 var(--face-mix),#a6b6c3)}
+.depth-brand-face{position:relative;transform:translateZ(.6px);color:var(--ink);text-shadow:0 2px 5px #101f3012}
+.depth-brand-face .brand-year{color:#536f86}
+.depth-brand[data-running] .depth-brand-stage{will-change:transform}
+@media(prefers-reduced-motion:reduce){.depth-brand .depth-brand-stage{will-change:auto}}
+.motion-paused .depth-brand .depth-brand-stage{will-change:auto}

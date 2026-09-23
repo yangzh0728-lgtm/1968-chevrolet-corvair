@@ -19,7 +19,12 @@ bpy.context.view_layer.update()
 # primer, rust, grime and chipped-paint layers, so the age stays legible.
 paint = bpy.data.materials['V2 • Weathered burgundy lacquer']
 pigment = paint.node_tree.nodes['Deeper weathered burgundy pigment']
-pigment.inputs[2].default_value = (.40, .26, .29, 1)
+pigment.inputs[2].default_value = (.24, .13, .15, 1)
+# Keep the dead lacquer from washing pink beneath the broad studio lights.
+# Apply this only to the painted body; glass, chrome and lights keep their sheen.
+surface = paint.node_tree.nodes['Surface']
+surface.inputs['Specular IOR Level'].default_value = .24
+surface.inputs['Coat Weight'].default_value = .008
 for ob in list(bpy.data.collections['STUDIO • cameras and lighting'].all_objects):
     ob.hide_render = True
 
@@ -76,6 +81,8 @@ manifest = {
     'orthographic_scale': camera.data.ortho_scale, 'source_frame': 1,
     'bytes': OUTPUT.stat().st_size,
     'paint_pigment_multiplier': list(pigment.inputs[2].default_value),
+    'paint_specular_ior_level': surface.inputs['Specular IOR Level'].default_value,
+    'paint_coat_weight': surface.inputs['Coat Weight'].default_value,
     'description': 'As-purchased Corvair with deeper burgundy paint, v7 peeling seat and all prior modeled wear.'
 }
 (REPORT / 'render-manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
